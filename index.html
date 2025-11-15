@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IMRAN MEDICOS</title>
+  <style>
+    :root{
+      --green-dark: #0b6b3a; /* main dark green */
+      --green: #13a65b;     /* accent green */
+      --green-light: #e8f6ee;
+      --white: #ffffff;
+      --muted: #6b6b6b;
+      --radius: 12px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--green-light),#ffffff);color:#0b2b1a}
+    header{background:var(--green-dark);color:var(--white);position:sticky;top:0;z-index:40;box-shadow:0 6px 18px rgba(3,30,18,0.15)}
+    .container{max-width:1100px;margin:0 auto;padding:0 18px}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:800}
+    nav ul{display:flex;gap:16px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--white);text-decoration:none;padding:8px 10px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,0.06)}
+
+    /* Mobile menu */
+    .mobile-toggle{display:none;background:transparent;border:0;color:var(--white);font-size:20px}
+    @media (max-width:860px){
+      nav ul{display:none;position:absolute;right:18px;top:64px;background:var(--green-dark);padding:12px;border-radius:10px;flex-direction:column;min-width:160px;box-shadow:0 8px 30px rgba(0,0,0,0.12)}
+      nav ul.show{display:flex}
+      .mobile-toggle{display:inline-block}
+    }
+
+    /* Hero */
+    .hero{padding:56px 0;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;position:relative}
+    .hero-left h1{margin:0;font-size:38px;color:var(--green-dark);letter-spacing:0.6px}
+    .hero-left p{color:var(--muted);margin-top:12px;line-height:1.5}
+    .cta{margin-top:18px}
+    .btn{display:inline-block;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+    .btn-primary{background:var(--green);color:var(--white)}
+    .btn-outline{border:2px solid var(--green);color:var(--green);background:transparent}
+
+    .hero-card{background:var(--white);border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(8,50,26,0.06)}
+    .hero-card h3{margin:0 0 8px 0;color:var(--green-dark)}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Product grid */
+    .products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width:980px){.hero{grid-template-columns:1fr} .products{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.products{grid-template-columns:1fr}}
+
+    .card{background:var(--white);padding:20px;border-radius:14px;box-shadow:0 8px 30px rgba(8,50,26,0.06);transition:box-shadow .25s ease}
+    .card:hover{box-shadow:0 14px 40px rgba(8,50,26,0.12)}
+    .price{font-size:20px;font-weight:700;color:var(--green-dark)}
+    .features{margin-top:12px;color:var(--muted)}
+
+    /* Cart */
+    .cart-toggle{position:fixed;right:18px;bottom:18px;background:var(--green);color:white;padding:12px;border-radius:50px;box-shadow:0 8px 30px rgba(3,30,18,0.2);cursor:pointer}
+    .cart-panel{position:fixed;right:18px;bottom:78px;width:320px;max-height:70vh;overflow:auto;background:white;border-radius:12px;padding:12px;box-shadow:0 20px 60px rgba(3,30,18,0.18);display:none}
+    .cart-panel.show{display:block}
+    .cart-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0}
+
+    /* FAQ */
+    .faq-item{background:var(--white);border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer}
+    .faq-q{display:flex;justify-content:space-between;align-items:center}
+    .faq-a{max-height:0;overflow:hidden;transition:all .28s ease;padding-top:0}
+    .faq-item.open .faq-a{max-height:200px;padding-top:10px}
+
+    /* Contact form */
+    form{display:grid;gap:12px}
+    input,textarea,select{padding:10px;border-radius:8px;border:1px solid #e3e3e3}
+    textarea{min-height:120px}
+    footer{padding:24px 0;text-align:center;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">IM</div>
+        <div>
+          <div style="font-size:14px;opacity:0.9">IMRAN</div>
+          <div style="font-size:12px;opacity:0.9">MEDICOS</div>
+        </div>
+      </div>
+      <nav>
+        <button class="mobile-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+        <ul id="menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" class="hero">
+      <div style="position:absolute; top:0; right:0; padding:10px; background:var(--green); color:white; border-radius:0 0 0 10px;">💊 Pharmacy Portal Open 24/7!</div>
+      <div class="hero-left">
+        <h1>IMRAN MEDICOS</h1>
+        <p>Trusted pharmacy solutions — reliable medicines, fast service and transparent pricing. We help patients and clinics get what they need, when they need it.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contact">Get in touch</a>
+          <a class="btn btn-outline" href="#pricing" style="margin-left:10px">See pricing</a>
+        </div>
+        <div style="margin-top:18px">
+          <input id="search" type="search" placeholder="Search products, e.g. Paracetamol" style="padding:10px;border-radius:8px;border:1px solid #e3e3e3;width:100%" oninput="filterProducts()" />
+        </div>
+      </div>
+
+      <div class="hero-card" style="transition:transform .3s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        <h3>Opening Hours</h3>
+        <p class="small">Mon – Sat: 9:00 AM – 9:00 PM<br/>Sun: 10:00 AM – 6:00 PM</p>
+        <hr style="margin:12px 0;border:none;border-top:1px solid #f0f0f0" />
+        <h3>Quick Services</h3>
+        <p class="small">Medicine delivery • Prescription processing • Consultation scheduling</p>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2 style="color:var(--green-dark)">Products</h2>
+      <p class="small">Browse featured products — click "Add" to put items in your cart.</p>
+      <div id="products" class="products" style="margin-top:16px">
+        <!-- Sample products (you can replace with backend data later) -->
+        <div class="card" data-name="Paracetamol 500mg" data-price="40">
+          <h3>Paracetamol 500mg</h3>
+          <p class="price">₹40</p>
+          <p class="small">Pain relief, fever reducer. 10 tablets</p>
+          <div style="margin-top:10px">
+            <button class="btn btn-primary" onclick="addToCart('Paracetamol 500mg',40)">Add</button>
+            <button class="btn btn-outline" style="margin-left:8px" onclick="showDetails('Paracetamol 500mg','Pain relief, 10 tablets')">Details</button>
+          </div>
+        </div>
+
+        <div class="card" data-name="Cough Syrup" data-price="120">
+          <h3>Cough Syrup</h3>
+          <p class="price">₹120</p>
+          <p class="small">Soothes cough and throat irritation. 100ml</p>
+          <div style="margin-top:10px">
+            <button class="btn btn-primary" onclick="addToCart('Cough Syrup',120)">Add</button>
+            <button class="btn btn-outline" style="margin-left:8px" onclick="showDetails('Cough Syrup','Soothes cough and throat irritation')">Details</button>
+          </div>
+        </div>
+
+        <div class="card" data-name="Vitamin D 60k" data-price="150">
+          <h3>Vitamin D 60k</h3>
+          <p class="price">₹150</p>
+          <p class="small">Monthly supplement. 1 dose</p>
+          <div style="margin-top:10px">
+            <button class="btn btn-primary" onclick="addToCart('Vitamin D 60k',150)">Add</button>
+            <button class="btn btn-outline" style="margin-left:8px" onclick="showDetails('Vitamin D 60k','Monthly supplement')">Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faqs">
+      <h2 style="color:var(--green-dark)">FAQs</h2>
+      <p class="small">Common questions answered.</p>
+      <div style="margin-top:12px">
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-q"><strong>Do you deliver medicines?</strong><span>+</span></div>
+          <div class="faq-a">Yes — we offer local delivery. Delivery charges depend on your location and order size.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-q"><strong>How do I upload a prescription?</strong><span>+</span></div>
+          <div class="faq-a">Use the contact form to attach a prescription file or bring the physical copy to our shop. We'll process it and confirm availability.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+          <div class="faq-q"><strong>Are prices fixed?</strong><span>+</span></div>
+          <div class="faq-a">Prices reflect current supplier rates. Paid plans include discounts and priority pricing where applicable.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 style="color:var(--green-dark)">Contact</h2>
+      <p class="small">Have a question or want to place a bulk order? Send us a message or upload a prescription.</p>
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:18px;margin-top:12px">
+        <div class="card">
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <label>Name</label>
+            <input type="text" id="name" placeholder="Your name" required />
+            <label>Phone / Email</label>
+            <input type="text" id="email" placeholder="Phone or email" required />
+            <label>Message</label>
+            <textarea id="message" placeholder="How can we help?" required></textarea>
+            <label>Upload Prescription (optional)</label>
+            <input type="file" id="prescription" accept="image/*,.pdf" />
+            <button class="btn btn-primary" type="submit">Send message</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Visit us</h3>
+          <p class="small">123 Main Street, Your City<br/>Phone: +91 98765 43210</p>
+          <hr style="margin:12px 0;border:none;border-top:1px solid #f0f0f0" />
+          <h3>Follow</h3>
+          <p class="small">Stay updated with offers and important announcements.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; <span id="year"></span> IMRAN MEDICOS — All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Cart UI -->
+  <div class="cart-toggle" onclick="toggleCart()">🛒 <span id="cartCount">0</span></div>
+  <div id="cartPanel" class="cart-panel">
+    <h3>Cart</h3>
+    <div id="cartItems"></div>
+    <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+      <strong>Total:</strong>
+      <strong id="cartTotal">₹0</strong>
+    </div>
+    <div style="margin-top:10px">
+      <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+      <button class="btn btn-outline" style="margin-left:8px" onclick="clearCart()">Clear</button>
+    </div>
+  </div>
+
+  <script>
+    // small helpers
+    function toggleMenu(){document.getElementById('menu').classList.toggle('show')}
+    document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('menu').classList.remove('show')))
+
+    // FAQ accordion
+    function toggleFAQ(el){ el.classList.toggle('open') }
+
+    // Product search/filter
+    function filterProducts(){
+      const q = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('#products .card').forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        const price = (card.dataset.price || '').toLowerCase();
+        if(!q || name.includes(q) || price.includes(q)) card.style.display = '';
+        else card.style.display = 'none';
+      })
+    }
+
+    // Simple in-memory cart (demo)
+    const CART = [];
+    function addToCart(name, price){
+      const existing = CART.find(i=>i.name===name);
+      if(existing) existing.qty++;
+      else CART.push({name, price, qty:1});
+      renderCart();
+    }
+    function renderCart(){
+      const panel = document.getElementById('cartItems');
+      panel.innerHTML = '';
+      let total = 0;
+      CART.forEach(item=>{
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `<div>${item.name} x ${item.qty}</div><div>₹${item.price*item.qty}</div>`;
+        panel.appendChild(div);
+        total += item.price*item.qty;
+      });
+      document.getElementById('cartTotal').textContent = '₹' + total;
+      document.getElementById('cartCount').textContent = CART.reduce((s,i)=>s+i.qty,0);
+    }
+    function toggleCart(){document.getElementById('cartPanel').classList.toggle('show')}
+    function clearCart(){CART.length=0;renderCart()}
+    function checkout(){
+      if(CART.length===0){alert('Your cart is empty');return}
+      // In a real app, send the order to backend here
+      alert('Checkout demo: order placed for ' + CART.reduce((s,i)=>s+ i.qty,0) + ' items. (Demo — no real payment)');
+      clearCart();
+      toggleCart();
+    }
+
+    // Details modal (simple alert for demo)
+    function showDetails(name, desc){alert(name + '\n\n' + desc)}
+
+    // Fake submit handler (non-functional) — replace with your backend endpoint
+    function handleSubmit(e){ e.preventDefault();
+      const name=document.getElementById('name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const msg=document.getElementById('message').value.trim();
+      if(!name||!email||!msg){alert('Please fill all fields');return}
+
+      const fileInput = document.getElementById('prescription');
+      const hasFile = fileInput && fileInput.files && fileInput.files.length>0;
+
+      if(hasFile){
+        // simple client-side file size check
+        const file = fileInput.files[0];
+        if(file.size > 5*1024*1024){alert('Prescription too large (max 5MB)'); return}
+        // In a real app you'd upload the file to your backend or cloud storage here
+      }
+
+      alert('Thanks, ' + name + '! Your message was received (this demo does not actually send anything).');
+      e.target.reset();
+    }
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // initial render
+    renderCart();
+  </script>
+</body>
+</html>
